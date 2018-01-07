@@ -131,7 +131,7 @@ def post2db(request):
         post2dbform = postform.PostForm(request.POST)
         if post2dbform.is_valid():
             post2dbform.save()
-            message = "成功存储，请牢记您的编辑密码：{}，信息审核通过后即可显示".format(request.POST['del_pass'])
+            message = "成功存储，请牢记您的编辑密码：{}，信息审核通过后即可显示！".format(request.POST['del_pass'])
             return HttpResponseRedirect('/list')
     else:
         post2dbform = postform.PostForm()
