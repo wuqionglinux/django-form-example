@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}看帖（cycle和图表集）{% endblock %}
+{% block content %}
+{% if message %}
+    <div class="alert alert-warning">{{ message }}</div>
+{% endif %}
+<div class="row">
+    <div class="col col-md-12">
+        <div class="card">
+            <div class="card-header" align="center">
+                <h3>~~NBA球员留言板~~</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="/list" method="post" name="delete-password">
+    <label for="user_pass">请输入删帖密码：</label>
+    <input type="password" id="user_pass" name="user_pass">
+</form>
+{% for post in posts %}
+    {% cycle "<div class='row'> <div class='col col-md-4'>" "<div class='col col-md-4'>" "<div class='col col-md-4'>" %}
+    <div class="card text-white bg-info mb-3" style="max-width: 30rem;">
+        <div class="card-header">
+            【{{ post.nickname }}】感到{{ post.mood.status }}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ post.message | truncatechars:40 }}
+        </div>
+        <div class="card-footer" align="right">
+            <i><small>{{ post.pub_time }}</small></i>
+            <span class="fa fa-trash" onclick="go_delete({{ post.id }})"></span>
+        </div>
+    </div>
+    {% cycle "</div>" "</div>" "</div> </div>" %}
+    {% if forloop.last %}
+        </div>
+{#        {% if num != 0 %}#}
+{#            </div>#}
+{#        {% endif %}#}
+    {% endif %}
+{% endfor %}
+{% endblock %}

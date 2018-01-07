@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}发帖（模型窗体类）{% endblock %}
+{% block content %}
+{% if message %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endif %}
+<form action="." method="post" name="my form">
+    {% csrf_token %}
+    <table>
+        {{ post2dbform.as_table }}
+    </table>
+    <input type="submit" value="提交">
+    <input type="reset" value="清空">
+</form>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}NBA球员留言板{% endblock %}
+{% block content %}
+{% if message %}
+    <div class="alert alert-warning">{{ message }}</div>
+{% endif %}
+<form action="/" method="get" name="my form">
+    现在的心情：<br/>
+    {% for foo in moods %}
+        <input type="radio" name="mood" value="{{ foo.status }}">{{ foo.status }}
+        {% if forloop.last %}
+            <br/>
+        {% endif %}
+    {% endfor %}
+    <label for="user_post">留言板：</label><br/>
+    <textarea name="user_post" id="user_post" cols="73" rows="3"></textarea><br/>
+    <label for="user_id">你的昵称:</label>
+    <input id="user_id" type="text" name="user_id">
+    <label for="user_pass">发帖\删帖密码:</label>
+    <input id="user_pass" type="password" name="user_pass"><br/>
+    <input type="submit" value="张贴">
+    <input type="reset" value="重置">
+</form>
+{% endblock %}
+
+{#<div class="container" align="center">#}
+{#    <form name="my form" action="/" method="get">#}
+{#        <label for="year">出生年份：</label>#}
+{#        <select name="year" id="year">#}
+{#            {% for y in years %}#}
+{#                <option value="{{ y }}">{{ y }}</option>#}
+{#            {% endfor %}#}
+{#        </select><br/>#}
+{#        喜欢的颜色（可复选）：#}
+{#        <input type="checkbox" name="fcolor" value="Green">Green#}
+{#        <input type="checkbox" name="fcolor" value="Red">Red#}
+{#        <input type="checkbox" name="fcolor" value="Blue">Blue#}
+{#        <input type="checkbox" name="fcolor" value="Yellow">Yellow#}
+{#        <input type="checkbox" name="fcolor" value="Orange">Orange<br/>#}
+{#        <label for="user_id">Your ID:</label>#}
+{#        <input id="user_id" type="text" name="user_id">#}
+{#        <label for="user_pass">Your Password:</label>#}
+{#        <input id="user_pass" type="password" name="user_pass">#}
+{#        <input type="submit" value="登录">#}
+{#        <input type="reset" value="重置">#}
+{#    </form>#}
+{#    Your ID: {{ urid | default:"未输入ID" }}<br/>#}
+{#    {% if verified %}#}
+{#        <em>您通过了验证</em><br/>#}
+{#    {% else %}#}
+{#        <em>验证未通过</em><br/>#}
+{#    {% endif %}#}
+{#    出生年份：{{ birthyear | default:"1960"}}<br/>#}
+{#    喜欢的颜色：#}
+{#    {% for foo in favorcolors %}#}
+{#        {{ foo }}#}
+{#    {% if forloop.last %}#}
+{#        <br/>#}
+{#    {% endif %}#}
+{#    {% empty %}#}
+{#        未选择喜欢的颜色<br/>#}
+{#    {% endfor %}#}
+{#</div>#}

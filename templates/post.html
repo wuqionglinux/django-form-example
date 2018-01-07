@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}发帖（窗体标签）{% endblock %}
+{% block content %}
+{% if message %}
+    <div class="alert alert-warning">{{ message }}</div>
+{% endif %}
+<form action="." method="post" name="my form">
+    {% csrf_token %}
+    现在的心情：<br/>
+    {% for foo in moods %}
+        <input type="radio" name="mood" value="{{ foo.status }}">{{ foo.status }}
+        {% if forloop.last %}
+            <br/>
+        {% endif %}
+    {% endfor %}
+    <label for="user_post">留言板：</label><br/>
+    <textarea name="user_post" id="user_post" cols="50" rows="10"></textarea><br/>
+    <label for="user_id">你的昵称:</label>
+    <input id="user_id" type="text" name="user_id">
+    <label for="user_pass">设置删帖密码:</label>
+    <input id="user_pass" type="password" name="user_pass"><br/>
+    <input type="submit" value="张贴">
+    <input type="reset" value="重置">
+</form>
+{% endblock %}
